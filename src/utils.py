@@ -3,7 +3,7 @@ import sys
 from src.exception import CustomException
 import dill
 from sklearn.metrics import mean_absolute_error,r2_score
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import RandomizedSearchCV,GridSearchCV
 import pandas as pd
 def save_object(file_path,obj):
     try:
@@ -14,6 +14,13 @@ def save_object(file_path,obj):
     except Exception as e:
         raise CustomException(e,sys)
 
+def load_object(file_path):
+    try:
+        with open(file_path,'rb') as f:
+            return dill.load(f)
+    except Exception as e:
+        raise CustomException(e,sys)
+    
 def evaluate_model(X_train , y_train, X_test , y_test , models):
     try:
         results = pd.DataFrame()

@@ -24,9 +24,9 @@ class DataTransfomation:
         this function is responsible for data transformation
         '''
         try:
-            numerical_cols = ['reading score']
-            ohe_cat_cols = ['gender','race/ethnicity','lunch','test preparation course']
-            ordinal_cols = ['parental level of education']
+            numerical_cols = ['reading_score']
+            ohe_cat_cols = ['gender','race_ethnicity','lunch','test_preparation_course']
+            ordinal_cols = ['parental_level_of_education']
             num_pipeline = Pipeline(
                 steps=[("imputer",SimpleImputer(strategy='median')),
                        ('scaler',StandardScaler())]
@@ -46,15 +46,15 @@ class DataTransfomation:
             raise CustomException(e,sys)
     def initiate_data_transformation(self,train_path,test_path):
         try:
-            train_df = pd.read_csv(train_path).drop(columns='writing score')
-            test_df = pd.read_csv(test_path).drop(columns='writing score')
+            train_df = pd.read_csv(train_path).drop(columns='writing_score')
+            test_df = pd.read_csv(test_path).drop(columns='writing_score')
             logging.info("read train and test data completed ")
             logging.info("obtaining preprocessing object")
             preprocessing_obj = self.get_data_transformer_object()
-            target_column_name = "math score"
-            numerical_cols = ['reading score']
-            ohe_cat_cols = ['gender','race/ethnicity','lunch','test preparation course']
-            ordinal_cols = ['parental level of education']
+            target_column_name = "math_score"
+            numerical_cols = ['reading_score']
+            ohe_cat_cols = ['gender','race_ethnicity','lunch','test_preparation_course']
+            ordinal_cols = ['parental_level of_education']
             input_feature_train_df = train_df.drop(columns=target_column_name)
             target_feature_train_df = train_df[target_column_name]
             input_feature_test_df = test_df.drop(columns=target_column_name)
